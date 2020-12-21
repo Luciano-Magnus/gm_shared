@@ -1,0 +1,12 @@
+
+
+import 'package:flutter/material.dart';
+
+class ColorsApp{
+  static const primaryColor =  Colors.black;
+  static const appBarColor = Colors.black87;
+  static const textColor = Colors.white;
+  static const xboxColor = Colors.green;
+  static const psColor = Colors.blue;
+  static const pcColor = Colors.red;
+}
