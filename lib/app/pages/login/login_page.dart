@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gm_shared/app/pages/login_user_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gm_shared/app/controllers/login/login_controller.dart';
+import 'package:gm_shared/app/pages/login/login_user_page.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
 import 'package:gm_shared/shared/components/btn_plataform.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final loginController = Modular.get<LoginController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +40,9 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: ColorsApp.pcColor,
                     textColor: ColorsApp.textColor,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginUserPage(
-                            'Computador',
-                            useColor: ColorsApp.pcColor,),
-                        ),
-                      );
+                      loginController.titleAndPlatform = 'Computador';
+                      loginController.useColor = ColorsApp.pcColor;
+                      Modular.to.pushNamed('/LoginUserPage');
                     },
                   ),
                   BtnPlataform(
@@ -53,14 +50,9 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: ColorsApp.xboxColor,
                     textColor: ColorsApp.textColor,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginUserPage(
-                            'X box',
-                            useColor: ColorsApp.xboxColor,),
-                        ),
-                      );
+                      loginController.titleAndPlatform = 'X box';
+                      loginController.useColor = ColorsApp.xboxColor;
+                      Modular.to.pushNamed('/LoginUserPage');
                     },
                   ),
                   BtnPlataform(
@@ -68,14 +60,9 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: ColorsApp.psColor,
                     textColor: ColorsApp.textColor,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginUserPage(
-                            'Playstation',
-                            useColor: ColorsApp.psColor,),
-                        ),
-                      );
+                      loginController.titleAndPlatform = 'Playstation';
+                      loginController.useColor = ColorsApp.psColor;
+                      Modular.to.pushNamed('/LoginUserPage');
                     },
                   ),
                 ],
