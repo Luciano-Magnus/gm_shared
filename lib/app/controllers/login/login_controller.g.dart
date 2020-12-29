@@ -40,12 +40,34 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
+  final _$userAtom = Atom(name: '_LoginController.user');
+
+  @override
+  Users get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(Users value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
   final _$createAcountAsyncAction =
       AsyncAction('_LoginController.createAcount');
 
   @override
   Future<dynamic> createAcount(BuildContext context) {
     return _$createAcountAsyncAction.run(() => super.createAcount(context));
+  }
+
+  final _$loginAcountAsyncAction = AsyncAction('_LoginController.loginAcount');
+
+  @override
+  Future<dynamic> loginAcount(BuildContext context) {
+    return _$loginAcountAsyncAction.run(() => super.loginAcount(context));
   }
 
   final _$_LoginControllerActionController =
@@ -77,7 +99,8 @@ mixin _$LoginController on _LoginController, Store {
   String toString() {
     return '''
 passowrd: ${passowrd},
-visiblityPassword: ${visiblityPassword}
+visiblityPassword: ${visiblityPassword},
+user: ${user}
     ''';
   }
 }

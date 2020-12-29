@@ -22,20 +22,23 @@ class LoginModel {
 }
 
 class Users {
+  String idUser;
   String nameUser;
   String passwordUser;
   String platformUser;
 
-  Users({ this.nameUser, this.passwordUser, this.platformUser});
+  Users({this.idUser, this.nameUser, this.passwordUser, this.platformUser});
 
   Users.fromJson(Map<String, dynamic> json) {
+    idUser = json['id_user'];
     nameUser = json['name_user'];
     passwordUser = json['password_user'];
     platformUser = json['platform_user'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  Map<String, String> toJson() {
+    final Map<String, String> data = new Map<String, String>();
+    data['id_user'] = this.idUser;
     data['name_user'] = this.nameUser;
     data['password_user'] = this.passwordUser;
     data['platform_user'] = this.platformUser;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ErrorDialog extends StatefulWidget {
   final String title;
@@ -6,15 +7,17 @@ class ErrorDialog extends StatefulWidget {
   final Widget content;
   final List<Widget> actions;
   final double height;
+  final bool okButton;
 
-  const ErrorDialog(
-      {Key key,
-      this.title,
-      this.borderColor,
-      this.content,
-      this.actions,
-      this.height})
-      : super(key: key);
+  const ErrorDialog({
+    Key key,
+    this.title,
+    this.borderColor,
+    this.content,
+    this.actions,
+    this.height,
+    this.okButton,
+  }) : super(key: key);
 
   @override
   _ErrorDialogState createState() => _ErrorDialogState();
@@ -29,7 +32,18 @@ class _ErrorDialogState extends State<ErrorDialog> {
           height: widget.height ?? 100,
           child: widget.content,
         ),
-        actions: widget.actions ?? [],
+        actions: widget.actions ??
+            [
+              Visibility(
+                visible: widget.okButton ?? true,
+                child: FlatButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Modular.to.pop();
+                  },
+                ),
+              )
+            ],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
           side: BorderSide(width: 2, color: widget.borderColor ?? Colors.white),

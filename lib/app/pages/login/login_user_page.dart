@@ -3,7 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gm_shared/app/controllers/login/login_controller.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
+import 'package:gm_shared/app/utils/styles/style_app.dart';
 import 'package:gm_shared/shared/components/btn_plataform.dart';
+import 'package:gm_shared/shared/components/gradient_text.dart';
 import 'package:gm_shared/shared/components/text_form_field_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,9 +19,12 @@ class _LoginUserPageState extends State<LoginUserPage> {
 
   TextEditingController controllerUserName = TextEditingController();
   TextEditingController controllerPassowrd = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+   if(loginController.signIn){
+     loginController.useColor = ColorsApp.primaryColor;
+     loginController.titleAndPlatform = '';
+   }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -37,7 +42,7 @@ class _LoginUserPageState extends State<LoginUserPage> {
             color: loginController.useColor,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Modular.to.pop();
           },
         ),
       ),
@@ -60,7 +65,7 @@ class _LoginUserPageState extends State<LoginUserPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16),
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 2.2,
+                  height: MediaQuery.of(context).size.height / 2.1,
                   child: Card(
                     shadowColor: loginController.useColor,
                     borderOnForeground: true,
@@ -73,11 +78,14 @@ class _LoginUserPageState extends State<LoginUserPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          'Crie sua conta',
-                          style: GoogleFonts.acme(
-                            color: loginController.useColor,
-                            fontSize: 20,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: Text(
+                            loginController.signIn ? 'Entrar na conta' : 'Crie sua conta',
+                            style: GoogleFonts.acme(
+                              color: loginController.useColor,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                         Column(
@@ -125,11 +133,34 @@ class _LoginUserPageState extends State<LoginUserPage> {
                                         ),
                                       ),
                                       controller: controllerPassowrd,
-                                      obscureText: loginController.visiblityPassword,
-                                      keybordType: TextInputType.visiblePassword,
+                                      obscureText:
+                                          loginController.visiblityPassword,
+                                      keybordType:
+                                          TextInputType.visiblePassword,
                                       borderColor: loginController.useColor,
                                       labelText: 'Senha',
                                     );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: loginController.signIn,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                  child: GradientTextWidget(
+                                    'Criar conta',
+                                    Colors.black,
+                                    Colors.black54,
+                                    textAlign: TextAlign.center,
+                                    paddignTop: 16,
+                                    paddignRight: 16,
+                                  ),
+                                  onTap: (){
+                                    loginController.signUp = true;
+                                    loginController.signIn = false;
+                                    Modular.to.pushNamed('/LoginPage');
                                   },
                                 ),
                               ),
@@ -141,13 +172,17 @@ class _LoginUserPageState extends State<LoginUserPage> {
                           child: BtnPlataform(
                               textColor: ColorsApp.textColor,
                               backgroundColor: loginController.useColor,
-                              title: 'Salvar',
+                              title:loginController.signIn ? 'Entrar' : 'Criar',
                               onPressed: () async {
                                 loginController.userName =
                                     controllerUserName.text;
                                 loginController
                                     .setPassword(controllerPassowrd.text);
-                                loginController.createAcount(context);
+                                if(loginController.signIn){
+                                    loginController.loginAcount(context);
+                                }else{
+                                  loginController.createAcount(context);
+                                }
                               }),
                         ),
                       ],
