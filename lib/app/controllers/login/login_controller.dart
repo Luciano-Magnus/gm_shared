@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gm_shared/app/app_controller.dart';
 import 'package:gm_shared/app/models/login/login_model.dart';
@@ -11,12 +12,10 @@ import 'package:gm_shared/app/utils/api/api_url.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
 import 'package:gm_shared/app/utils/styles/style_app.dart';
 import 'package:gm_shared/shared/components/error_dialog.dart';
-import 'package:gm_shared/shared/components/load_dialog.dart';
-import 'package:gm_shared/shared/components/sucess_dialog.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:password/password.dart';
-import 'package:http/http.dart' as http;
 
 part 'login_controller.g.dart';
 
@@ -43,7 +42,22 @@ abstract class _LoginController with Store {
   bool visiblityPassword = false;
 
   @observable
+  File foto;
+
+  @observable
   Users user = Users();
+
+  @action
+  void setFoto(File value, BuildContext context) {
+    foto = value;
+    appController.load(context, useColor);
+  }
+
+  void getPhoto()async{
+    ImagePicker imagePicker = ImagePicker();
+    var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    foto = _image;
+  }
 
   @action
   void setVisiblityPassword(bool visiblity) => visiblityPassword = visiblity;
@@ -69,27 +83,7 @@ abstract class _LoginController with Store {
 
     if (response.statusCode == 200) {
       Modular.to.pop();
-      showDialog(
-        context: context,
-        builder: (context) => SucessDialog(
-          height: 90,
-          content: Text(
-            'Sua conta foi criada com sucesso',
-            style: GoogleFonts.righteous(),
-          ),
-          actions: [
-            FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                'OK',
-                style: StyleApp.styleActions,
-              ),
-            )
-          ],
-        ),
-      );
+      Modular.to.pushReplacementNamed('/PerfilPage');
     } else {
       if (response.statusCode == 123) {
         Modular.to.pop();

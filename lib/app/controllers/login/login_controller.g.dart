@@ -40,6 +40,21 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
+  final _$fotoAtom = Atom(name: '_LoginController.foto');
+
+  @override
+  File get foto {
+    _$fotoAtom.reportRead();
+    return super.foto;
+  }
+
+  @override
+  set foto(File value) {
+    _$fotoAtom.reportWrite(value, super.foto, () {
+      super.foto = value;
+    });
+  }
+
   final _$userAtom = Atom(name: '_LoginController.user');
 
   @override
@@ -74,6 +89,17 @@ mixin _$LoginController on _LoginController, Store {
       ActionController(name: '_LoginController');
 
   @override
+  void setFoto(File value, BuildContext context) {
+    final _$actionInfo = _$_LoginControllerActionController.startAction(
+        name: '_LoginController.setFoto');
+    try {
+      return super.setFoto(value, context);
+    } finally {
+      _$_LoginControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setVisiblityPassword(bool visiblity) {
     final _$actionInfo = _$_LoginControllerActionController.startAction(
         name: '_LoginController.setVisiblityPassword');
@@ -100,6 +126,7 @@ mixin _$LoginController on _LoginController, Store {
     return '''
 passowrd: ${passowrd},
 visiblityPassword: ${visiblityPassword},
+foto: ${foto},
 user: ${user}
     ''';
   }

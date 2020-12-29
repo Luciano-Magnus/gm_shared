@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gm_shared/app/utils/colors/colors_app.dart';
 
-// MaterialButton(
-// onPressed: () {},
-// child: Padding(
-// padding: const EdgeInsets.only(left: 16, right: 16),
-// child: Container(
-// decoration: BoxDecoration(color: ColorsApp.xboxColor,borderRadius: BorderRadius.circular(50)),
-// // color: ColorsApp.xboxColor,
-// width: double.infinity,
-// height: 50,
-// child: Center(
-// child: Text(
-// 'X Box',
-// textAlign: TextAlign.center,
-// style: TextStyle(
-// color: ColorsApp.textColor,
-// ),
-// )),
-// ),
-// ),
-// )
 class BtnPlataform extends StatefulWidget {
   final Color backgroundColor;
   final Color textColor;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gm_shared/app/controllers/login/login_controller.dart';
-import 'package:gm_shared/app/pages/login/login_user_page.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
 import 'package:gm_shared/shared/components/btn_plataform.dart';
 import 'package:google_fonts/google_fonts.dart';

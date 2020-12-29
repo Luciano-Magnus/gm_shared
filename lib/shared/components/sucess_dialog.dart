@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gm_shared/app/utils/colors/colors_app.dart';
 
 class SucessDialog extends StatefulWidget {
   final String title;

@@ -35,7 +35,10 @@ dependencies:
   flutter_modular: ^2.0.1
   gradient_text: ^1.0.2
   animated_splash_screen: ^1.0.1+2
-
+  flutter_icons: ^1.1.0
+  flutter_launcher_icons:
+  image_picker: ^0.6.7+17
+  file: ^5.2.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,6 +49,12 @@ dev_dependencies:
     sdk: flutter
   mobx_codegen: ^1.1.1+1
   build_runner: ^1.8.0
+
+
+flutter_icons:
+  image_path: "assets/images/logo_app_v1.png"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
