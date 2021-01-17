@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       loginController.titleAndPlatform = 'Computador';
                       loginController.useColor = ColorsApp.pcColor;
-                      Modular.to.pushNamed('/LoginUserPage');
+                      Modular.to.pushNamed('/PerfilPage');
                     },
                   ),
                   BtnPlataform(
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       loginController.titleAndPlatform = 'X box';
                       loginController.useColor = ColorsApp.xboxColor;
-                      Modular.to.pushNamed('/LoginUserPage');
+                      Modular.to.pushNamed('/PerfilPage');
                     },
                   ),
                   BtnPlataform(
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       loginController.titleAndPlatform = 'Playstation';
                       loginController.useColor = ColorsApp.psColor;
-                      Modular.to.pushNamed('/LoginUserPage');
+                      Modular.to.pushNamed('/PerfilPage');
                     },
                   ),
                 ],

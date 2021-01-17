@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gm_shared/app/utils/colors/colors_app.dart';
 
 class TextFormFieldWidget extends StatefulWidget {
   final TextEditingController controller;
@@ -10,6 +11,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final String labelText;
   final bool enabled;
   final Widget suffix;
+  final Color colorText;
 
   const TextFormFieldWidget({
     Key key,
@@ -22,6 +24,7 @@ class TextFormFieldWidget extends StatefulWidget {
     this.labelText,
     this.enabled,
     this.suffix,
+    this.colorText,
   }) : super(key: key);
 
   @override
@@ -41,10 +44,12 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             controller: widget.controller,
             keyboardType: widget.keybordType ?? TextInputType.text,
             cursorColor: widget.borderColor,
+            style: TextStyle(color: widget.colorText ?? ColorsApp.primaryColor),
             decoration: InputDecoration(
               suffix: widget.suffix,
               labelText: widget.labelText,
               labelStyle: TextStyle(color: widget.borderColor),
+
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(color: widget.borderColor, width: 2.0),

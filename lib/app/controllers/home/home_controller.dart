@@ -24,4 +24,18 @@ abstract class _HomeController with Store {
         break;
     }
   }
+
+  void setPhotoPlatform(){
+    switch (login.user.platformUser) {
+      case 'Computador':
+        login.assetsPhotoPlatform = 'logo_steam_.svg';
+        break;
+      case 'X box':
+        login.assetsPhotoPlatform = 'logo_xbox.svg';
+        break;
+      case 'Playstation':
+        login.assetsPhotoPlatform = 'logo_playstation.svg';
+        break;
+    }
+  }
 }

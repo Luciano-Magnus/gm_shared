@@ -40,18 +40,18 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
-  final _$fotoAtom = Atom(name: '_LoginController.foto');
+  final _$photoAtom = Atom(name: '_LoginController.photo');
 
   @override
-  File get foto {
-    _$fotoAtom.reportRead();
-    return super.foto;
+  File get photo {
+    _$photoAtom.reportRead();
+    return super.photo;
   }
 
   @override
-  set foto(File value) {
-    _$fotoAtom.reportWrite(value, super.foto, () {
-      super.foto = value;
+  set photo(File value) {
+    _$photoAtom.reportWrite(value, super.photo, () {
+      super.photo = value;
     });
   }
 
@@ -74,8 +74,8 @@ mixin _$LoginController on _LoginController, Store {
       AsyncAction('_LoginController.createAcount');
 
   @override
-  Future<dynamic> createAcount(BuildContext context) {
-    return _$createAcountAsyncAction.run(() => super.createAcount(context));
+  Future<dynamic> createAccount(BuildContext context) {
+    return _$createAcountAsyncAction.run(() => super.createAccount(context));
   }
 
   final _$loginAcountAsyncAction = AsyncAction('_LoginController.loginAcount');
@@ -126,7 +126,7 @@ mixin _$LoginController on _LoginController, Store {
     return '''
 passowrd: ${passowrd},
 visiblityPassword: ${visiblityPassword},
-foto: ${foto},
+photo: ${photo},
 user: ${user}
     ''';
   }

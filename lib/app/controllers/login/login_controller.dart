@@ -10,6 +10,7 @@ import 'package:gm_shared/app/app_controller.dart';
 import 'package:gm_shared/app/models/login/login_model.dart';
 import 'package:gm_shared/app/utils/api/api_url.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
+import 'package:gm_shared/app/utils/img/img_app.dart';
 import 'package:gm_shared/app/utils/styles/style_app.dart';
 import 'package:gm_shared/shared/components/error_dialog.dart';
 import 'package:http/http.dart' as http;
@@ -24,8 +25,7 @@ class LoginController = _LoginController with _$LoginController;
 abstract class _LoginController with Store {
   final appController = Modular.get<AppController>();
 
-  bool signIn = true;
-  bool signUp = false;
+  String assetsPhotoPlatform = '';
 
   String titleAndPlatform = '';
 
@@ -38,25 +38,30 @@ abstract class _LoginController with Store {
   @observable
   String passowrd = '';
 
+  String userFavoriteGame = '';
+
+  String userDescription = '';
+
   @observable
   bool visiblityPassword = false;
 
   @observable
-  File foto;
+  File photo;
 
   @observable
   Users user = Users();
 
   @action
   void setFoto(File value, BuildContext context) {
-    foto = value;
+    photo = value;
     appController.load(context, useColor);
   }
 
   void getPhoto()async{
-    ImagePicker imagePicker = ImagePicker();
     var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    foto = _image;
+    if(_image != null){
+      photo = _image;
+    }
   }
 
   @action
@@ -66,7 +71,7 @@ abstract class _LoginController with Store {
   void setPassword(String value) => passowrd = value;
 
   @action
-  Future createAcount(BuildContext context) async {
+  Future createAccount(BuildContext context) async {
     appController.load(context, useColor);
 
     String hash =
@@ -76,14 +81,16 @@ abstract class _LoginController with Store {
     user.nameUser = userName;
     user.passwordUser = hash;
     user.platformUser = titleAndPlatform;
-
-    print(user.nameUser);
+    user.descriptionUser = userDescription;
+    user.photoUser = photo;
+    user.favoriteGameUser = userFavoriteGame;
 
     var response = await http.post(ApiUrl.urlPost, body: user.toJson());
+    print(response.body);
 
     if (response.statusCode == 200) {
       Modular.to.pop();
-      Modular.to.pushReplacementNamed('/PerfilPage');
+      Modular.to.pushReplacementNamed('/HomePage');
     } else {
       if (response.statusCode == 123) {
         Modular.to.pop();
@@ -193,14 +200,25 @@ abstract class _LoginController with Store {
   Future<bool> response() async {
     var dioResponse = await Dio().get('${ApiUrl.urlGetLogin}/$userName');
 
+
     int i = dioResponse.data.toString().length - 266;
 
     String response = dioResponse.data.toString().substring(0, i);
 
-    LoginModel login = LoginModel();
+    Users login = Users();
 
     try {
-      login = LoginModel.fromJson(jsonDecode(response));
+      var json = jsonDecode(response.replaceAll('[', '').replaceAll(']', ''));
+
+      var dir = await Users().dir();
+      login = Users.fromJson(json, dir);
+      user.photoUser = login.photoUser;
+      user.nameUser = login.nameUser;
+      photo = login.photoUser;
+      user.platformUser = login.platformUser;
+      user.descriptionUser = login.descriptionUser;
+      user.favoriteGameUser = login.favoriteGameUser;
+      user.scoreUser = login.scoreUser;
     } catch (e) {
       print('ue');
       Modular.to.pop();
@@ -209,16 +227,18 @@ abstract class _LoginController with Store {
 
     Modular.to.pop();
 
-    if (login.users.length > 0) {
-      if (Password.verify(
-          passowrd ?? '0', login.users?.first?.passwordUser ?? '1')) {
-        user = login.users.first;
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
+    return true;
+    // if (login.idUser > 0) {
+    //   if (Password.verify(
+    //       passowrd ?? '0', login.users?.first?.passwordUser ?? '1')) {
+    //     user = login.users.first;
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // } else {
+    //   return false;
+    // }
   }
+
 }

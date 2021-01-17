@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorsApp {
   static const primaryColor = Colors.black;
+  static final secundaryColor = Colors.grey[900];
   static const appBarColor = Colors.black87;
   static const textColor = Colors.white;
   static const actionsTextColor = Colors.black;
