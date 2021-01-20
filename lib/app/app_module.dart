@@ -8,8 +8,8 @@ import 'package:gm_shared/app/pages/home/home_page.dart';
 import 'package:gm_shared/app/pages/login/login_page.dart';
 import 'package:gm_shared/app/pages/login/login_user_page.dart';
 import 'package:gm_shared/app/pages/login/perfil_page.dart';
-import 'package:gm_shared/app/pages/publications/publications_pages.dart';
 import 'package:gm_shared/app/pages/splash/my_splash_screen.dart';
+import 'package:gm_shared/app/publications/publications_module.dart';
 import 'package:gm_shared/shared/components/foto_perfil/foto_perfil_controller.dart';
 
 class AppModule extends MainModule{
@@ -30,7 +30,7 @@ class AppModule extends MainModule{
     ModularRouter('/LoginPage', child: (_, args) => LoginPage()),
     ModularRouter('/PerfilPage', child: (_, args) => PerfilPage()),
     ModularRouter('/HomePage', child: (_, args) => HomePage()),
-    ModularRouter('/PublicationsPage', child: (_, args) => PublicationsPage()),
+    ModularRouter('/PublicationsPage', module: PublicationsModule()),
   ];
 
   @override

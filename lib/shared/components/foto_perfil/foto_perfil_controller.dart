@@ -1,7 +1,5 @@
 import 'dart:typed_data';
-import 'package:file/file.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:mobx/mobx.dart';
 
 part 'foto_perfil_controller.g.dart';

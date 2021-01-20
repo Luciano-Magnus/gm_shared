@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gm_shared/app/controllers/login/login_controller.dart';
-import 'package:gm_shared/app/utils/colors/colors_app.dart';
 import 'package:gm_shared/app/utils/img/img_app.dart';
 
 class FotoPerfilWidget extends StatelessWidget {
-  final ImageProvider _CAMERA_ICON =
-      Image.asset("${ImgApp.image}placeholder.png").image;
   final MainAxisAlignment alignment;
   final double height;
   final double width;

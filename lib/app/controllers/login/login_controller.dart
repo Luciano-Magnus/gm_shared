@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:gm_shared/app/app_controller.dart';
 import 'package:gm_shared/app/models/login/login_model.dart';
 import 'package:gm_shared/app/utils/api/api_url.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
-import 'package:gm_shared/app/utils/img/img_app.dart';
 import 'package:gm_shared/app/utils/styles/style_app.dart';
 import 'package:gm_shared/shared/components/error_dialog.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +29,7 @@ abstract class _LoginController with Store {
 
   String signInOrSignUp = '';
 
-  Color useColor = ColorsApp.primaryColor;
+  Color useColor;
 
   String userName = '';
 

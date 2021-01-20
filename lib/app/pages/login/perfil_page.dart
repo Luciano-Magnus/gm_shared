@@ -1,16 +1,13 @@
-import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gm_shared/app/controllers/login/login_controller.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
-import 'package:gm_shared/app/utils/img/img_app.dart';
 import 'package:gm_shared/shared/components/btn_plataform.dart';
 import 'package:gm_shared/shared/components/foto_perfil/foto_perfil_controller.dart';
+import 'package:gm_shared/shared/components/foto_perfil/foto_perfil_widget.dart';
 import 'package:gm_shared/shared/components/text_form_field_widget.dart';
-import 'file:///C:/Users/Luciano%20Magnus/AndroidStudioProjects/gm_shared/lib/shared/components/foto_perfil/foto_perfil_widget.dart';
-import 'package:image_picker/image_picker.dart';
 
 class PerfilPage extends StatefulWidget {
   @override

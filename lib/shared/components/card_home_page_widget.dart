@@ -44,9 +44,13 @@ class _CardHomePageWidgetState extends State<CardHomePageWidget> {
               child: InkWell(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 onTap: (){
-                  if(index == 3){
-                      Modular.to.pushNamed('PerfilPage');
+                  switch(index){
+                    case 0:  Modular.to.pushNamed('PublicationsPage');
+                    break;
+                    case 3:  Modular.to.pushNamed('PerfilPage');
+                    break;
                   }
+
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

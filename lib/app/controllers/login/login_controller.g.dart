@@ -70,12 +70,12 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
-  final _$createAcountAsyncAction =
-      AsyncAction('_LoginController.createAcount');
+  final _$createAccountAsyncAction =
+      AsyncAction('_LoginController.createAccount');
 
   @override
   Future<dynamic> createAccount(BuildContext context) {
-    return _$createAcountAsyncAction.run(() => super.createAccount(context));
+    return _$createAccountAsyncAction.run(() => super.createAccount(context));
   }
 
   final _$loginAcountAsyncAction = AsyncAction('_LoginController.loginAcount');
