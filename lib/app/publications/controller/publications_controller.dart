@@ -25,6 +25,7 @@ abstract class _PublicationsController with Store{
   @action
   Future<void> getPublications()async{
     publications = await publicationsService.getPublications().asObservable();
+     publications.sort((a, b) => b.idPublication.compareTo(a.idPublication));
   }
 }
 

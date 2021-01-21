@@ -5,6 +5,7 @@ import 'package:gm_shared/app/app_controller.dart';
 import 'package:gm_shared/app/controllers/login/login_controller.dart';
 import 'package:gm_shared/app/publications/controller/publications_controller.dart';
 import 'package:gm_shared/app/utils/colors/colors_app.dart';
+import 'package:gm_shared/shared/components/publications/card_publication_widget.dart';
 
 class PublicationsPage extends StatefulWidget {
   @override
@@ -20,7 +21,6 @@ class _PublicationsPageState
     // TODO: implement initState
     super.initState();
     _loadPublications();
-    setState(() {});
   }
 
   @override
@@ -84,54 +84,10 @@ class _PublicationsPageState
                             itemCount: controller.publications.length ?? 0,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                title: Container(
-                                  height: 120,
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        controller.publications[index]
-                                            .descriptionPublication,
-                                        style: TextStyle(
-                                            color: controller
-                                                .loginController.useColor),
-                                      ),
-                                      Text(
-                                        controller
-                                            .publications[index].dataHoraCriado,
-                                        style: TextStyle(
-                                            color: controller
-                                                .loginController.useColor),
-                                      ),
-                                      Text(
-                                        controller.publications[index]
-                                            .likesPublication
-                                            .toString(),
-                                        style: TextStyle(
-                                            color: controller
-                                                .loginController.useColor),
-                                      ),
-                                      Text(
-                                        controller.publications[index].idUser,
-                                        style: TextStyle(
-                                            color: controller
-                                                .loginController.useColor),
-                                      ),
-                                      Text(
-                                        controller
-                                            .publications[index].idPublication,
-                                        style: TextStyle(
-                                            color: controller
-                                                .loginController.useColor),
-                                      ),
-                                      Text(
-                                        controller.publications[index]
-                                            .photoPublication,
-                                        style: TextStyle(
-                                            color: controller
-                                                .loginController.useColor),
-                                      ),
-                                    ],
-                                  ),
+                                title: CardPublicationWidget(
+                                  publication: controller.publications[index],
+                                  borderColor:
+                                      controller.loginController.useColor,
                                 ),
                               );
                             },
