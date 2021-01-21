@@ -2,6 +2,12 @@
 
 class ApiUrl{
   static const _ip = '192.168.0.106';
-  static const urlPost = 'http://$_ip/tcc/public/insert-user';
-  static const urlGetLogin = 'http://$_ip/tcc/public/get-login';
+  static const _baseUrl = 'http://$_ip/tcc/public';
+
+  static const urlPost = '$_baseUrl/insert-user';
+  static const urlGetLogin = '$_baseUrl/get-login';
+
+  //region Publicações
+  static const urlGetPublications = '$_baseUrl/get-publications';
+  //endregion
 }

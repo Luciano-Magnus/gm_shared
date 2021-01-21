@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gm_shared/app/app_controller.dart';
 import 'package:gm_shared/app/controllers/login/login_controller.dart';
@@ -12,12 +13,16 @@ class PublicationsPage extends StatefulWidget {
 
 class _PublicationsPageState
     extends ModularState<PublicationsPage, PublicationsController> {
+  AppController appController = Modular.get<AppController>();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(controller.loginController.user.nameUser);
+    _loadPublications();
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,7 +41,9 @@ class _PublicationsPageState
                     'Compartilhados',
                     style: TextStyle(color: ColorsApp.textColor),
                   ),
-                  SizedBox(height: 8,)
+                  SizedBox(
+                    height: 8,
+                  )
                 ],
               ),
               Column(
@@ -45,49 +52,108 @@ class _PublicationsPageState
                     'Procurando por grupo',
                     style: TextStyle(color: ColorsApp.textColor),
                   ),
-                  SizedBox(height: 8,)
+                  SizedBox(
+                    height: 8,
+                  )
                 ],
               ),
             ],
-
-            onTap: (index){
-              switch(index){
-                case 0: print(index);
-                break;
-                case 1: print(index);
-                break;
+            onTap: (index) async {
+              switch (index) {
+                case 0:
+                  controller.isPrimaryPage = true;
+                  _loadPublications();
+                  break;
+                case 1:
+                  controller.isPrimaryPage = false;
+                  break;
               }
             },
             indicatorColor: controller.loginController.useColor,
             isScrollable: true,
           ),
         ),
-        body: Column(
-          children: [
-            Text('Bem vindo'),
-            Text(
-              controller.loginController.user.nameUser ?? '',
-              style: TextStyle(color: controller.loginController.useColor),
-            ),
-            Text(
-              controller.loginController.user.platformUser ?? '',
-              style: TextStyle(color: controller.loginController.useColor),
-            ),
-            Text(
-              controller.loginController.user.descriptionUser ?? '',
-              style: TextStyle(color: controller.loginController.useColor),
-            ),
-            Text(
-              controller.loginController.user.favoriteGameUser ?? 'ops',
-              style: TextStyle(color: controller.loginController.useColor),
-            ),
-            Text(
-              controller.loginController.user.idUser ?? '123',
-              style: TextStyle(color: controller.loginController.useColor),
-            ),
-          ],
+        body: Observer(
+          builder: (_) {
+            return controller.isPrimaryPage
+                ? Container(
+                    child: Column(
+                      children: [
+                        Flexible(
+                          child: ListView.builder(
+                            itemCount: controller.publications.length ?? 0,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Container(
+                                  height: 120,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        controller.publications[index]
+                                            .descriptionPublication,
+                                        style: TextStyle(
+                                            color: controller
+                                                .loginController.useColor),
+                                      ),
+                                      Text(
+                                        controller
+                                            .publications[index].dataHoraCriado,
+                                        style: TextStyle(
+                                            color: controller
+                                                .loginController.useColor),
+                                      ),
+                                      Text(
+                                        controller.publications[index]
+                                            .likesPublication
+                                            .toString(),
+                                        style: TextStyle(
+                                            color: controller
+                                                .loginController.useColor),
+                                      ),
+                                      Text(
+                                        controller.publications[index].idUser,
+                                        style: TextStyle(
+                                            color: controller
+                                                .loginController.useColor),
+                                      ),
+                                      Text(
+                                        controller
+                                            .publications[index].idPublication,
+                                        style: TextStyle(
+                                            color: controller
+                                                .loginController.useColor),
+                                      ),
+                                      Text(
+                                        controller.publications[index]
+                                            .photoPublication,
+                                        style: TextStyle(
+                                            color: controller
+                                                .loginController.useColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : Container(
+                    child: Text(
+                      'TELA 2',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  );
+          },
         ),
       ),
     );
+  }
+
+  Future<void> _loadPublications() async {
+    print('Carregando publicações da Api...');
+    await controller.getPublications();
   }
 }

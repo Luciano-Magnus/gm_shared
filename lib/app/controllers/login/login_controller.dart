@@ -226,17 +226,6 @@ abstract class _LoginController with Store {
     Modular.to.pop();
 
     return true;
-    // if (login.idUser > 0) {
-    //   if (Password.verify(
-    //       passowrd ?? '0', login.users?.first?.passwordUser ?? '1')) {
-    //     user = login.users.first;
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // } else {
-    //   return false;
-    // }
   }
 
 }
