@@ -84,11 +84,13 @@ class _PublicationsPageState
                             itemCount: controller.publications.length ?? 0,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                title: CardPublicationWidget(
-                                  publication: controller.publications[index],
-                                  borderColor:
-                                      controller.loginController.useColor,
-                                ),
+                                title: Observer(
+                                  builder: (context) => CardPublicationWidget(
+                                    publication: controller.publications[index],
+                                    borderColor:
+                                    controller.loginController.useColor,
+                                  ),
+                                )
                               );
                             },
                           ),

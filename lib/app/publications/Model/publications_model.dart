@@ -28,14 +28,17 @@ class Publications {
   String likesPublication;
   String idUser;
   String dataHoraCriado;
+  bool isLike;
 
-  Publications(
-      {this.idPublication,
-        this.photoPublication,
-        this.descriptionPublication,
-        this.likesPublication,
-        this.idUser,
-        this.dataHoraCriado});
+  Publications({
+    this.idPublication,
+    this.photoPublication,
+    this.descriptionPublication,
+    this.likesPublication,
+    this.idUser,
+    this.dataHoraCriado,
+    this.isLike = false,
+  });
 
   Publications.fromJson(Map<String, dynamic> json) {
     idPublication = json['id_publication'];
